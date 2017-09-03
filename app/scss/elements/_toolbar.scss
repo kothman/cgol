@@ -1,0 +1,70 @@
+.toolbar {
+  list-style: none;
+  display: block;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+
+  .toolbar-item {
+    display: inline-block;
+    list-style: inherit;
+    margin-bottom: 0;
+
+    label {
+      display: inherit;
+      min-width: 3.5rem;
+      margin-left: 1rem;
+    }
+
+    input {
+      display: inherit;
+      vertical-align: middle;
+      position: relative;
+
+      @include transition;
+
+      &[disabled] {
+        cursor: not-allowed;
+
+        &:after {
+          @include transition;
+          color: transparent;
+          content: 'Coming soon!';
+          text-align: center;
+          top: -2rem;
+          width: 100%;
+          height: 1.5rem;
+          padding: .5rem;
+          box-sizing: border-box;
+          display: block;
+          position: absolute;
+        }
+
+        &:hover::after {
+          color: inherit;
+          @include transition;
+        }
+      }
+    }
+
+    .play-pause-button {
+      min-width: 5rem;
+
+      .visible-playing, .visible-paused {
+        display: none;
+        float: right;
+      }
+
+      &.playing .visible-playing {
+        display: initial;
+      }
+
+      &.paused .visible-paused {
+        display: initial;
+      }
+    }
+
+
+
+  }
+}

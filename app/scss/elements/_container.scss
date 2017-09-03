@@ -1,0 +1,11 @@
+.container {
+  padding: 1rem 2rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}

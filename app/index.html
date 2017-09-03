@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Game of Life">
+    <title>Game of Life</title>
+
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<section class="container">
+    <div class="title-container menu">
+        <h1 class="title"><u>Game of Life</u></h1>
+    </div>
+    <ul class="toolbar">
+        <li class="toolbar-item">
+            <button class="play-pause-button button paused" type="button">
+                <span class="text">Play</span>
+                <i class="fa fa-heart-o visible-paused"></i>
+                <i class="fa fa-heartbeat visible-playing"></i>
+            </button>
+        </li>
+        <li class="toolbar-item">
+            <button class="step-button button" type="button">Step</button>
+        </li>
+        <li class="toolbar-item">
+            <button class="reset-button button" type="button">Reset</button>
+        </li>
+        <li class="toolbar-item">
+            <label for="speed-range">
+                <i>Speed</i>
+            </label>
+            <input id="speed-range"
+                   class="speed-range" type="range"
+                   value="1" min="1" max="10"/>
+        </li>
+        <li class="toolbar-item">
+            <label for="size-range">
+                <i>Size</i>
+            </label>
+            <input id="size-range"
+                   class="size-range" type="range"
+                   value="5" min="1" max="10"/>
+        </li>
+    </ul>
+    <div class="canvas-container">
+        <canvas id="the-canvas"></canvas>
+    </div>
+
+</section>
+<script src="js/main.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+</body>
+</html>

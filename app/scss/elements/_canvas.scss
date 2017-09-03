@@ -1,0 +1,12 @@
+.canvas-container {
+  display: flex;
+  height: 100%;
+}
+canvas {
+  display: block;
+  border: none;
+  background: transparent;
+  height: 100%;
+  max-width: 100%;
+  border: 1px solid black;
+}

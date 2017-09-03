@@ -1,0 +1,14 @@
+.button {
+  text-align: left;
+  background: transparent;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  @include transition;
+
+  &:active {
+    background: rgba(0, 0, 0, .2);
+    border: 1px solid transparent;
+  }
+}
