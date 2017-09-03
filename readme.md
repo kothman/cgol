@@ -1,4 +1,4 @@
-#Conway's Game of Life
+# Conway's Game of Life
 
 [Wikipedia Article][1]
 
