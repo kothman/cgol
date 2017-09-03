@@ -30,6 +30,7 @@ class Life {
         this.assignToolbarElements();
         this.createCells();
         this.calculateNewCells();
+        Cell.setSize(this.sizeRange.valueAsNumber);
         this.drawAllCells();
 
         this.addListeners();
@@ -78,7 +79,7 @@ class Life {
     }
 
     onChangeSize() {
-        Cell.setSize(100 / this.sizeRange.valueAsNumber);
+        Cell.setSize(this.sizeRange.valueAsNumber);
         this.createCells();
         this.drawAllCells();
     }

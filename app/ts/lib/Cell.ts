@@ -50,7 +50,7 @@ class Cell {
     }
 
     static setSize(x: number) {
-        Cell.size = x;
+        Cell.size = 20 * x;
     }
 
     contains(x: number, y: number): boolean {
