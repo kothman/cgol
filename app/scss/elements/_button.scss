@@ -1,14 +1,43 @@
 .button {
   text-align: left;
-  background: transparent;
+  background: white;
   border: 1px solid $border-color;
   border-radius: 5px;
+  margin-right: .2rem;
   outline: none;
   cursor: pointer;
   @include transition;
+
+  &.audio-button {
+    width: 2rem;
+    text-align: center;
+    border-radius: 0;
+    background: rgba(0, 0, 0, .1);
+    color: rgba(0, 0, 0, 0.4);
+
+    &.active {
+      background: white;
+      color: black;
+    }
+
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &:not(:last-child) {
+      border-right: none;
+      margin-right: -5px;
+    }
+  }
 
   &:active {
     background: rgba(0, 0, 0, .2);
     border: 1px solid transparent;
   }
+
 }

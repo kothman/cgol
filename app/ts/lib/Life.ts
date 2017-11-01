@@ -11,29 +11,112 @@ class Life {
     stepButton: HTMLButtonElement;
     resetButton: HTMLButtonElement;
     speedRange: HTMLInputElement;
-    sizeRange: HTMLInputElement;
+    zoomRange: HTMLInputElement;
 
     isPlaying: boolean = false;
 
     height: number = 400;
     width: number = 600;
 
-    speed: number = 1;
-    size: number = 1;
+    speed: number;
+    size: number;
+
+    static firstGen: number[][] | null[][] = [
+        [], [], [], [], [], [], [], [], [],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [],
+        [],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [], [], [], [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+        [],
+        [],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+
+    ];
 
     private intervalReference: number;
 
 
     constructor(c: Canvas) {
-        this.canvas = c;
+        this.init(c);
+    }
+
+    init(c: Canvas | null) {
+        if (c !== null)
+            this.canvas = c;
         this.canvas.setCanvasDimensions();
         this.assignToolbarElements();
+        Cell.setSize(this.zoomRange.valueAsNumber);
         this.createCells();
+        this.loadCellsFromNumberArray(Life.firstGen);
         this.calculateNewCells();
-        Cell.setSize(this.sizeRange.valueAsNumber);
+        this.onChangeSize();
+        this.onChangeSpeed();
         this.drawAllCells();
 
         this.addListeners();
+    }
+
+    loadCellsFromNumberArray(cells: number[][] | null[][]) {
+        for (let y = 0; y < cells.length; y++) {
+            for (let x = 0; x < cells[y].length; x++) {
+                if (cells[y][x] === 1) {
+                    this.getCell(new Point(x, y)).regen();
+                }
+            }
+        }
+    }
+
+    loadCells(cells: Cell[][]) {
+        for (let y = 0; y < cells.length; y++) {
+            for (let x = 0; x < cells[y].length; x++) {
+                this.cells[y][x] = cells[y][x]
+            }
+        }
     }
 
     addListeners() {
@@ -43,7 +126,7 @@ class Life {
         this.stepButton.addEventListener('click', this.step.bind(this));
         this.resetButton.addEventListener('click', this.reset.bind(this));
         this.speedRange.addEventListener('change', this.onChangeSpeed.bind(this));
-        this.sizeRange.addEventListener('change', this.onChangeSize.bind(this));
+        this.zoomRange.addEventListener('change', this.onChangeSize.bind(this));
     }
 
     assignToolbarElements() {
@@ -51,7 +134,7 @@ class Life {
         this.stepButton = <HTMLButtonElement> document.querySelector('.step-button');
         this.resetButton = <HTMLButtonElement> document.querySelector('.reset-button');
         this.speedRange = <HTMLInputElement> document.querySelector('.speed-range');
-        this.sizeRange = <HTMLInputElement> document.querySelector('.size-range');
+        this.zoomRange = <HTMLInputElement> document.querySelector('.zoom-range');
     }
 
     onClick(e: MouseEvent) {
@@ -79,8 +162,11 @@ class Life {
     }
 
     onChangeSize() {
-        Cell.setSize(this.sizeRange.valueAsNumber);
+        let cells = this.cells;
+        Cell.setSize(this.zoomRange.valueAsNumber);
+        this.canvas.setCanvasDimensions();
         this.createCells();
+        this.loadCells(cells);
         this.drawAllCells();
     }
 
@@ -110,7 +196,12 @@ class Life {
         if (!c.alive) {
             // Had some weird issues with using ctx.strokeRect,
             // seemed to create a larger rectangle than just ctx.fillRect
-            ctx.clearRect(c.getX() + 1, c.getY() + 1, Cell.getSize() - 2, Cell.getSize() - 2);
+            ctx.clearRect(
+                c.getX(),
+                c.getY(),
+                Cell.getSize(),
+                Cell.getSize()
+            );
         }
 
     }
@@ -147,46 +238,17 @@ class Life {
     getSurroundingCells(c: Cell): Cell[] {
         let cells = [];
 
-        // @todo Figure out a more elegant way to do this?
-        if (c.x - 1 >= 0) {
-            cells.push(
-                this.getCell(new Point(c.x - 1, c.y))
-            );
-        }
-        if (c.x - 1 >= 0 && c.y - 1 >= 0) {
-            cells.push(
-                this.getCell(new Point(c.x - 1, c.y - 1))
-            );
-        }
-        if (c.x - 1 >= 0 && c.y + 1 < this.height) {
-            cells.push(
-                this.getCell(new Point(c.x - 1, c.y + 1))
-            );
-        }
-        if (c.x + 1 < this.width) {
-            cells.push(
-                this.getCell(new Point(c.x + 1, c.y))
-            );
-        }
-        if (c.y - 1 >= 0 && c.x + 1 < this.width) {
-            cells.push(
-                this.getCell(new Point(c.x + 1, c.y - 1))
-            );
-        }
-        if (c.x + 1 < this.width && c.y + 1 < this.height) {
-            cells.push(
-                this.getCell(new Point(c.x + 1, c.y + 1))
-            );
-        }
-        if (c.y + 1 < this.height) {
-            cells.push(
-                this.getCell(new Point(c.x, c.y + 1))
-            );
-        }
-        if (c.y - 1 >= 0) {
-            cells.push(
-                this.getCell(new Point(c.x, c.y - 1))
-            );
+        for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+                if (c.x + x >= 0 && c.y + y >= 0 &&
+                    c.x + x < this.width && c.y + y < this.height &&
+                    !(x === 0 && y === 0)
+                ) {
+                    cells.push(
+                        this.getCell(new Point(c.x + x, c.y + y))
+                    );
+                }
+            }
         }
 
         return cells;
@@ -273,17 +335,18 @@ class Life {
         this.intervalReference = setInterval(function () {
             this.step();
         }.bind(this), 1000 / this.speed);
+        this.isPlaying = true;
     }
 
     /**
      * Stop stepping forward
      */
     pause() {
-
         this.playPauseButton.classList.remove('playing');
         this.playPauseButton.classList.add('paused');
         this.playPauseButton.querySelector('.text').innerHTML = 'Play';
         clearInterval(this.intervalReference);
+        this.isPlaying = false;
     }
 
     reset() {
@@ -291,7 +354,8 @@ class Life {
             this.pause();
         }
         this.clear();
-
+        //this.loadCells(Life.firstGen);
+        this.drawAllCells();
     }
 
     clear() {
@@ -301,12 +365,10 @@ class Life {
                 c.kill();
             }
         }
-        this.drawAllCells();
     }
 
     playPause() {
         this.isPlaying ? this.pause() : this.play();
-        this.isPlaying = !this.isPlaying;
     }
 
 }

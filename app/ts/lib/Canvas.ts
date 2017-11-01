@@ -38,13 +38,13 @@ class Canvas {
     setWidth(w: number) {
         this.width = w - (w % Cell.size);
         this.canvas.setAttribute("width", this.getWidth().toString());
-        this.canvas.style.width = this.getWidth().toString();
+        this.canvas.style.width = this.getWidth().toString() + "px";
     }
 
     setHeight(h: number) {
         this.height = h - (h % Cell.size);
         this.canvas.setAttribute("height", this.getHeight().toString());
-        this.canvas.style.height = this.getHeight().toString();
+        this.canvas.style.height = this.getHeight().toString() + "px";
     }
 
     getHeight(): number {

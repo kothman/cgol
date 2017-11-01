@@ -16,6 +16,10 @@
     </div>
     <ul class="toolbar">
         <li class="toolbar-item">
+            <button class="button audio-button active" type="button"><i class="fa fa-volume-up"></i></button>
+            <button class="button audio-button" type="button"><i class="fa fa-volume-off"></i></button>
+        </li>
+        <li class="toolbar-item">
             <button class="play-pause-button button paused" type="button">
                 <span class="text">Play</span>
                 <i class="fa fa-heart-o visible-paused"></i>
@@ -34,15 +38,15 @@
             </label>
             <input id="speed-range"
                    class="speed-range" type="range"
-                   value="1" min="1" max="10"/>
+                   value="500" min="1" max="1000"/>
         </li>
         <li class="toolbar-item">
-            <label for="size-range">
-                <i>Size</i>
+            <label for="zoom-range">
+                <i>Zoom</i>
             </label>
-            <input id="size-range"
-                   class="size-range" type="range"
-                   value="2" min="1" max="10"/>
+            - <input id="zoom-range"
+                   class="zoom-range" type="range"
+                   value="3" min="1" max="10"/> +
         </li>
     </ul>
     <div class="canvas-container">

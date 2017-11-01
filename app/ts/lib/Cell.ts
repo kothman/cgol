@@ -50,16 +50,7 @@ class Cell {
     }
 
     static setSize(x: number) {
-        Cell.size = 20 * x;
-    }
-
-    contains(x: number, y: number): boolean {
-        return (
-            x >= this.x &&
-            x <= Cell.getActualPosition(this.x) &&
-            y >= this.y &&
-            y <= Cell.getActualPosition(this.y)
-        );
+        Cell.size = 4 * x;
     }
 
     /**
