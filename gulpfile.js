@@ -32,6 +32,14 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('scripts', function() {
+    gulp.src('./app/ts/lib/**/*')
+	.pipe(sourceMaps.init())
+	.pipe(ts({
+	    outDir: '/dist/js/',
+	    outFile: 'lib.js'
+	}))
+	.pipe(sourceMaps.write())
+	.pipe(gulp.dest('./dist/js/'));
     return gulp.src(['./app/ts/lib/**/*', './app/ts/main.ts'])
         .pipe(sourceMaps.init())
         .pipe(ts({
