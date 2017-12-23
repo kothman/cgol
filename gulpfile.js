@@ -6,6 +6,7 @@ var bulkSass = require('gulp-sass-glob-import');
 var sourceMaps = require('gulp-sourcemaps');
 var ts = require('gulp-typescript');
 var concat = require('gulp-concat');
+var jasmineBrowser = require('gulp-jasmine-browser');
 
 gulp.task('default', ['watch']);
 
@@ -56,4 +57,10 @@ gulp.task('scripts:watch', function () {
 
 gulp.task('watch', function () {
     gulp.run(['scripts:watch', 'sass:watch', 'html:watch']);
+});
+
+gulp.task('test', function () {
+    return gulp.src(['./dist/js/lib.js', './spec/**/*.js'])
+	.pipe(jasmineBrowser.specRunner())
+	.pipe(jasmineBrowser.server({port: 8888}));
 });

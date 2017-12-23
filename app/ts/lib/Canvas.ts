@@ -7,8 +7,8 @@ class Canvas {
 
     ctx: CanvasRenderingContext2D;
 
-    constructor(selector: string) {
-        this.canvas = <HTMLCanvasElement> document.querySelector(selector);
+    constructor(canvas: HTMLCanvasElement) {
+        this.canvas = canvas;
         Canvas.lastResize = Date.now();
         this.ctx = this.canvas.getContext("2d");
 
